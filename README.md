@@ -16,6 +16,7 @@ npm start
 |---|---|
 | `GET /dishes` | The whole menu |
 | `GET /dishes/:id` | One dish, or `404` |
+| `GET /dishes/search?q=` | Dishes whose name matches `q` |
 
 ## Test it
 
