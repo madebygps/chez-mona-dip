@@ -46,4 +46,12 @@ app.get('/dishes/:id', (req, res) => {
   });
 });
 
+app.get('/dishes/search', (req, res) => {
+  const term = req.query.q;
+  db.all(`SELECT * FROM dishes WHERE name LIKE '%${term}%'`, (err, rows) => {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json(rows);
+  });
+});
+
 module.exports = { app, db };
