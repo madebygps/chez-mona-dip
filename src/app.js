@@ -1,4 +1,5 @@
 const express = require('express');
+const { rateLimit } = require('express-rate-limit');
 const sqlite3 = require('sqlite3');
 
 const db = new sqlite3.Database(':memory:');
@@ -27,6 +28,8 @@ db.serialize(() => {
 });
 
 const app = express();
+
+app.use(rateLimit({ windowMs: 60 * 1000, limit: 100 }));
 
 app.get('/dishes', (req, res) => {
   db.all('SELECT * FROM dishes ORDER BY id', (err, rows) => {
